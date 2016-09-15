@@ -57,7 +57,6 @@ def reset_password(username):
         system("passwd %s" % username)
 
 
-# TODO
 def is_user_exist(username):
     users = get_users_list()
     if username in users.values():
