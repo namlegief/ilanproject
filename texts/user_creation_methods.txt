@@ -1,0 +1,4 @@
+1) create user without home directory
+2) create user without shell
+3) create user with home directory and shell
+4) back

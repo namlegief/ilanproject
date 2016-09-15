@@ -1,0 +1,14 @@
+########################################
+Made by: Evgeny Feigelman
+	Linux tiny  (Active Directory)
+########################################
+
+1) List of all users
+2) List of all groups
+3) Reset password
+4) Create new user
+5) Create new group
+6) List all mounts
+7) Mount a folder
+8) Add new commands to .profile of a certain user
+9) Exit

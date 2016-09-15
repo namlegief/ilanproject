@@ -1,0 +1,6 @@
+1) Show user groups
+2) Show user ID
+3) Show user aliases
+4) Add new alias
+5) Change password
+6) Back
