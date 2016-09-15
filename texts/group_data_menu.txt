@@ -1,0 +1,4 @@
+1) Show users in the  Group
+2) Show group  id
+3) Add user to this group
+4) Back
