@@ -3,6 +3,7 @@ import os.path
 import common_functions
 import routes
 
+
 def get_users_list():
     counter = 1
     myFile = open('/etc/passwd', 'r')
@@ -30,6 +31,7 @@ def get_task_over_user():
     uc = int(common_functions.get_user_input("Please choose entry: ", "int"))
     return uc
 
+
 def display_users_list():
     users = get_users_list()
     for key in users.keys():
@@ -38,13 +40,13 @@ def display_users_list():
 
 def show_user_groups(username):
     print(system("groups %s" % username))
-    uc = routes.user_functions.get_task_over_user()
+    uc = get_task_over_user()
     routes.user_data_routes(uc, username)
 
 
 def show_user_id(username):
     print(system("id -u %s" % username))
-    uc = routes.user_functions.get_task_over_user()
+    uc = get_task_over_user()
     routes.user_data_routes(uc, username)
 
 
@@ -56,7 +58,7 @@ def show_user_aliases(username):
     for line in raw_data:
         if line.startswith("alias"):
             print line
-    uc = routes.user_functions.get_task_over_user()
+    uc = get_task_over_user()
     routes.user_data_routes(uc, username)
 
 
@@ -70,13 +72,13 @@ def create_new_alias(username):
             out = open(bashrc, 'a')
             out.write(new_alias)
             out.close()
-    uc = routes.user_functions.get_task_over_user()
+    uc = get_task_over_user()
     routes.user_data_routes(uc, username)
 
 
 def reset_password(username):
     system("passwd %s" % username)
-    uc = routes.user_functions.get_task_over_user()
+    uc = get_task_over_user()
     routes.user_data_routes(uc, username)
 
 
