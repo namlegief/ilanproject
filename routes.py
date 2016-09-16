@@ -1,4 +1,4 @@
-import user_function
+import user_functions
 import group_functions
 import common_functions
 
@@ -6,11 +6,14 @@ import common_functions
 def main_menu_routes(uc):
     uc = int(uc)
     if uc == 1:
-        user_choice_route("list_users")
+        username = user_functions.pick_user()
+        uc = user_functions.get_task_over_user()
+        user_data_routes(uc, username)
     elif uc == 2:
-        group_functions.display_groups_list()
+        group_choice_route("list_groups")
     elif uc == 3:
-        user_choice_route("reset_password")
+        username = user_functions.pick_user()
+        user_data_routes("5", username)
     elif uc == 4:
         user_create_menu_routes()
     # elif uc == 5:
@@ -27,42 +30,18 @@ def main_menu_routes(uc):
         print("Now such option.")
 
 
-def user_choice_route(task):
-    user_function.display_users_list()
-    user_number = common_functions.get_user_choice("Please choose user:\n")
-    if common_functions.validate_choice(user_number, "int"):
-        user_number = int(user_number)
-        users = user_function.get_users_list()
-        username = users[user_number]
-    else:
-        print("Wrong user number. Choose again: ")
-        user_choice_route(task)
-    if task == "list_users":
-        uc = 0
-        while uc != 6:
-            common_functions.display_menu("users_data_menu")
-            uc = int(common_functions.get_user_choice("Please choose entry: "))
-            if uc < 1 or uc > 6:
-                print "not valid choise"
-            else:
-                user_data_routes(uc, username)
-
-    elif task == "reset_password":
-        user_function.reset_password(username)
-
-
 def user_data_routes(uc, username):
     uc = int(uc)
     if uc == 1:
-        user_function.show_user_groups(username)
+        user_functions.show_user_groups(username)
     elif uc == 2:
-        user_function.show_user_id(username)
+        user_functions.show_user_id(username)
     elif uc == 3:
-        user_function.show_user_aliases(username)
+        user_functions.show_user_aliases(username)
     elif uc == 4:
-        user_function.create_new_alias(username)
+        user_functions.create_new_alias(username)
     elif uc == 5:
-        user_function.reset_password(username)
+        user_functions.reset_password(username)
     elif uc == 6:
         print("6")
     else:
@@ -71,6 +50,30 @@ def user_data_routes(uc, username):
 
 
 def user_create_menu_routes():
-    user_function.display_user_creation_methods()
-    method = common_functions.get_user_input("Choose the method:\n")
-    user_function.create_user(method)
+    user_functions.display_user_creation_methods()
+    method = common_functions.get_user_input("Choose the method: ")
+    user_functions.create_user(method)
+
+
+def group_choice_route(task):
+    group_functions.display_groups_list()
+    group_number = common_functions.get_user_input("Please choose group: ", "int")
+    groups = group_functions.get_groups_list()
+    groupname = groups[group_number]
+    if task == "list_groups":
+        common_functions.display_menu("groups_data_menu")
+        uc = int(common_functions.get_user_input("Please choose entry: ", "int"))
+        group_data_routes(uc, groupname)
+
+
+def group_data_routes(uc, groupname):
+    uc = int(uc)
+    if uc == 1:
+        group_functions.show_users_in_group(groupname)
+    elif uc == 2:
+        group_functions.show_group_id(groupname)
+    elif uc == 3:
+        group_functions.add_user_to_this_group(groupname)
+    else:
+        print("back")
+        user_data_routes()

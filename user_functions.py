@@ -1,7 +1,7 @@
 from os import system
 import os.path
 import common_functions
-
+import routes
 
 def get_users_list():
     counter = 1
@@ -17,12 +17,35 @@ def get_users_list():
     return users
 
 
+def pick_user():
+    display_users_list()
+    user_number = int(common_functions.get_user_input("Please choose user: ", "int"))
+    users = get_users_list()
+    username = users[user_number]
+    return username
+
+
+def get_task_over_user():
+    common_functions.display_menu("users_data_menu")
+    uc = int(common_functions.get_user_input("Please choose entry: ", "int"))
+    return uc
+
+def display_users_list():
+    users = get_users_list()
+    for key in users.keys():
+        print str(key) + ": " + users[key]
+
+
 def show_user_groups(username):
     print(system("groups %s" % username))
+    uc = routes.user_functions.get_task_over_user()
+    routes.user_data_routes(uc, username)
 
 
 def show_user_id(username):
     print(system("id -u %s" % username))
+    uc = routes.user_functions.get_task_over_user()
+    routes.user_data_routes(uc, username)
 
 
 def show_user_aliases(username):
@@ -33,6 +56,8 @@ def show_user_aliases(username):
     for line in raw_data:
         if line.startswith("alias"):
             print line
+    uc = routes.user_functions.get_task_over_user()
+    routes.user_data_routes(uc, username)
 
 
 def create_new_alias(username):
@@ -45,16 +70,14 @@ def create_new_alias(username):
             out = open(bashrc, 'a')
             out.write(new_alias)
             out.close()
-
-
-def display_users_list():
-    users = get_users_list()
-    for key in users.keys():
-        print str(key) + ": " + users[key]
+    uc = routes.user_functions.get_task_over_user()
+    routes.user_data_routes(uc, username)
 
 
 def reset_password(username):
-        system("passwd %s" % username)
+    system("passwd %s" % username)
+    uc = routes.user_functions.get_task_over_user()
+    routes.user_data_routes(uc, username)
 
 
 def is_user_exist(username):
