@@ -62,7 +62,7 @@ def user_data_routes(uc, username):
     elif uc == 4:
         user_function.create_new_alias(username)
     elif uc == 5:
-        print("back")
+        user_function.reset_password(username)
     elif uc == 6:
         print("6")
     else:

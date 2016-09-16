@@ -8,15 +8,15 @@ import group_functions
 with open("texts/main_menu.txt", "r") as f:
     main_menu = f.read()
     f.close()
-
 with open("texts/users_data_menu.txt", "r") as f:
     users_data_menu = f.read()
     f.close()
-
 with open("texts/user_creation_methods.txt", "r") as f:
     user_creation_methods = f.read()
     f.close()
-
+with open("texts/group_data_menu.txt", "r") as f:
+    group_data_menu = f.read()
+    f.close()
 
 def display_menu(menu_type):
     if menu_type == "main_menu":
@@ -25,7 +25,8 @@ def display_menu(menu_type):
         print users_data_menu
     elif menu_type == "user_creation_methods":
         print user_creation_methods
-
+    elif menu_type == "group_data_menu":
+        print group_data_menu
 
 def validate_choice(user_choice, input_type):
     return True
