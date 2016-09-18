@@ -44,7 +44,9 @@ def show_users_in_group(groupname):
 
 
 def show_group_id(groupname):
-    print ("group ID is: ABC")
+    group_id = "awk -F\: '{print \"Group \" $1 \" with GID=\" $3}' /etc/group | grep %s" % groupname
+    print group_id
+    system(group_id)
     uc = get_task_over_group()
     routes.group_data_routes(uc, groupname)
 
