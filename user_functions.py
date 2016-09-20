@@ -20,7 +20,7 @@ def get_users_list():
 
 def pick_user():
     display_users_list()
-    user_number = int(common_functions.get_user_input("Please choose user: ", "int"))
+    user_number = int(common_functions.get_user_input("Please choose user: ", int))
     users = get_users_list()
     username = users[user_number]
     return username
@@ -28,7 +28,7 @@ def pick_user():
 
 def get_task_over_user():
     common_functions.display_menu("users_data_menu")
-    uc = int(common_functions.get_user_input("Please choose entry: ", "int"))
+    uc = int(common_functions.get_user_input("Please choose entry: ", int))
     return uc
 
 
