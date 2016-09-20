@@ -15,7 +15,8 @@ def validate_value(input_data, var_type):
     :return: none
     Function gets var type of int or string and checks if variable type suits var_type
     """
-    return isinstance(input_data, var_type)
+    return True
+   # return isinstance(input_data, var_type)
 
 
 def get_user_input(prompt_string, var_type):

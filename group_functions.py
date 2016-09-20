@@ -1,4 +1,5 @@
 from os import system
+from os import popen
 import common_functions
 import user_functions
 import routes
@@ -38,14 +39,16 @@ def display_groups_list():
 
 
 def show_users_in_group(groupname):
-    print ("Users in group ")
+    main_user = popen("grep '^%s:' /etc/group | awk -F ':' {'print $3'} | xargs id -Gn" % groupname).read()
+    regular_user_list = popen("grep '^%s:' /etc/group | cut -d\: -f4-" % groupname).read()
+    print "Main group owner: " + main_user
+    print "Regular user[s]: " + regular_user_list
     uc = get_task_over_group()
     routes.group_data_routes(uc, groupname)
 
 
 def show_group_id(groupname):
     group_id = "awk -F\: '{print \"Group \" $1 \" with GID=\" $3}' /etc/group | grep %s" % groupname
-    print group_id
     system(group_id)
     uc = get_task_over_group()
     routes.group_data_routes(uc, groupname)
@@ -56,7 +59,7 @@ def add_user_to_this_group(groupname):
     user_number = int(common_functions.get_user_input("Please choose user: ", int))
     users = user_functions.get_users_list()
     username = users[user_number]
-    system("usermod %s -G %s" % (username, groupname))
+    system("usermod -a -G %s %s" % (groupname, username))
     uc = get_task_over_group()
     routes.group_data_routes(uc, groupname)
 
