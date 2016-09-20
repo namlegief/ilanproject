@@ -19,8 +19,8 @@ def main_menu_routes():
         user_data_routes("5", username)
     elif task == 4:
         user_create_menu_routes()
-    # elif task == 5:
-    #     create_group()
+    elif task == 5:
+        group_functions.create_group()
     # elif task == 6:
     #     list_mounts()
     # elif task == 7:

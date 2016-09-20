@@ -59,3 +59,25 @@ def add_user_to_this_group(groupname):
     system("usermod %s -G %s" % (username, groupname))
     uc = get_task_over_group()
     routes.group_data_routes(uc, groupname)
+
+
+def is_group_exist(groupname):
+    all_groups = get_groups_list()
+    if groupname in all_groups.values():
+        return True
+    else:
+        return False
+
+
+def create_group():
+    groupname = raw_input("Please enter name for new group :")
+    if is_group_exist(groupname):
+        print("Group " + groupname + " already exists. Type new groupname: ")
+        create_group()
+    else:
+        command = ('groupadd ' + groupname)
+        system(command)
+        routes.main_menu_routes()
+
+
+
