@@ -51,8 +51,6 @@ def show_user_id(username):
 
 
 def show_user_aliases(username):
-    #show_aliases = ("cat /home/%s/.bashrc | grep ^alias" %username)
-    #print(system(show_aliases))
     myFile = open('/home/' + username + '/.bashrc', 'r')
     raw_data = myFile.readlines()
     for line in raw_data:
@@ -91,20 +89,27 @@ def is_user_exist(username):
 
 
 def create_user(method):
-    username = common_functions.get_user_input("Please type username: ")
+    username = common_functions.get_user_input("Please type username: ", str)
+    comments = raw_input("Please enter the phone number and address: ")
     if is_user_exist(username):
         print("User " + username + " already exists. Type new name: ")
         create_user(method)
     else:
         if method == "1":
-            system("useradd -s /bin/bash -r %s" % username)
+            system("useradd -s /bin/bash -r %s -c %s" % (username, comments))
         elif method == "2":
-            system("useradd -s /bin/false %s" % username)
+            system("useradd -s /bin/false %s -c %s" % (username, comments))
         elif method == "3":
-            system("useradd -s /bin/bash $s" % username)
+            system("useradd -s /bin/bash %s -c %s" % (username, comments))
 
 
 def display_user_creation_methods():
     common_functions.display_menu("user_creation_methods")
+
+
+def add_new_commands(username):
+    command = raw_input("Please type the command, that you want to add to " + username + "'s .profile")
+    with open('/home/' + username + '/.profile', "a") as myfile:
+        myfile.write(command)
 
 

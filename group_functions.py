@@ -19,7 +19,7 @@ def get_groups_list():
 
 def pick_group():
     display_groups_list()
-    group_number = int(common_functions.get_user_input("Please choose group: ", "int"))
+    group_number = int(common_functions.get_user_input("Please choose group: ", int))
     groups = get_groups_list()
     groupname = groups[group_number]
     return groupname
@@ -27,7 +27,7 @@ def pick_group():
 
 def get_task_over_group():
     common_functions.display_menu("groups_data_menu")
-    uc = int(common_functions.get_user_input("Please choose entry: ", "int"))
+    uc = int(common_functions.get_user_input("Please choose entry: ", int))
     return uc
 
 
@@ -53,7 +53,7 @@ def show_group_id(groupname):
 
 def add_user_to_this_group(groupname):
     user_functions.display_users_list()
-    user_number = int(common_functions.get_user_input("Please choose user: ", "int"))
+    user_number = int(common_functions.get_user_input("Please choose user: ", int))
     users = user_functions.get_users_list()
     username = users[user_number]
     system("usermod %s -G %s" % (username, groupname))

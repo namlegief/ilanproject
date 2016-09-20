@@ -1,11 +1,11 @@
 import user_functions
 import group_functions
 import common_functions
-
+import os_functions
 
 def main_menu_routes():
     common_functions.display_menu("main_menu")
-    task = int(common_functions.get_user_input("Please choose task: ", "int"))
+    task = int(common_functions.get_user_input("Please choose task: ", int))
     if task == 1:
         username = user_functions.pick_user()
         uc = user_functions.get_task_over_user()
@@ -21,12 +21,13 @@ def main_menu_routes():
         user_create_menu_routes()
     elif task == 5:
         group_functions.create_group()
-    # elif task == 6:
-    #     list_mounts()
-    # elif task == 7:
-    #     mount_folder()
-    # elif task == 8:
-    #     add_new_command()
+    elif task == 6:
+        os_functions.list_all_mounts()
+    elif task == 7:
+        os_functions.mount_folder()
+    elif task == 8:
+        username = user_functions.pick_user()
+        user_functions.add_new_commands(username)
     # elif task == 9:
     #     exit_programm()
     else:
@@ -51,7 +52,7 @@ def user_data_routes(uc, username):
 
 def user_create_menu_routes():
     user_functions.display_user_creation_methods()
-    method = common_functions.get_user_input("Choose the method: ")
+    method = common_functions.get_user_input("Choose the method: ", int)
     user_functions.create_user(method)
 
 
